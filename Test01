@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<TriggernometryExport Version="1">
+  <ExportedFolder Id="84780474-255a-43f2-b4a4-90e8aab56380" Name="Local triggers" Enabled="true">
+    <Folders>
+      <Folder Id="e623ce3f-6ff8-496c-9e08-b49e905e9569" Name="Test" Enabled="true">
+        <Folders>
+          <Folder Id="884b0821-6530-4555-beb9-6fbc314a0722" Name="EnemyList" Enabled="true">
+            <Folders>
+              <Folder Id="d32cf828-b7af-44af-b705-9d9c665b8d4a" Name="Func" Enabled="true">
+                <Folders />
+                <Triggers>
+                  <Trigger Enabled="true" Name="Init" Id="2d7ec86e-e2f3-4d4d-b9a6-16334876f3bd" RegularExpression="">
+                    <Actions>
+                      <Action OrderNumber="1" LogLevel="-1" VariableOp="SetNumeric" VariableName="Enemy-ID" VariableExpression="0" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" ActionType="Variable">
+                        <Condition Enabled="false" Grouping="Or" />
+                        <Conditions />
+                      </Action>
+                      <Action OrderNumber="2" LogLevel="-1" VariableOp="UnsetRegex" VariableName="Enemy-Name-([0-9\.]+)" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" ActionType="Variable">
+                        <Condition Enabled="false" Grouping="Or" />
+                        <Conditions />
+                      </Action>
+                      <Action OrderNumber="3" LogLevel="-1" VariableOp="SetString" VariableName="Enemy-Name-0" VariableExpression="Name" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" Enabled="False" ActionType="Variable">
+                        <Condition Enabled="false" Grouping="Or" />
+                        <Conditions />
+                      </Action>
+                      <Action OrderNumber="4" LogLevel="-1" UseTTSTextExpression="初期化完了" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" ActionType="UseTTS">
+                        <Condition Enabled="false" Grouping="Or" />
+                        <Conditions />
+                      </Action>
+                    </Actions>
+                    <Condition Enabled="false" Grouping="Or" />
+                    <Conditions />
+                  </Trigger>
+                </Triggers>
+              </Folder>
+              <Folder Id="98977d55-b21e-47d4-8170-6e11cef18142" Name="Reset" Enabled="true">
+                <Folders />
+                <Triggers>
+                  <Trigger Enabled="true" Name="Zone Change" Id="7c02a501-02c3-4892-ba0b-29293abe0f5a" RegularExpression="01:Changed Zone">
+                    <Actions />
+                    <Condition Enabled="false" Grouping="Or" />
+                    <Conditions />
+                  </Trigger>
+                  <Trigger Enabled="true" Name="Wipe" Id="6eb0a41d-49be-4e6f-8fc1-dfe19a06b461" RegularExpression="21:[A-F0-9]{8}:40000010">
+                    <Actions />
+                    <Condition Enabled="false" Grouping="Or" />
+                    <Conditions />
+                  </Trigger>
+                </Triggers>
+              </Folder>
+            </Folders>
+            <Triggers>
+              <Trigger Enabled="true" Name="EnemyAdd" Id="bf60bc7d-2c0e-40ae-9605-1d866a69850a" RegularExpression="15:[A-F0-9]{8}:(?&lt;name&gt;[a-zA-Z-' ]{2,33}):AC:[a-zA-Z-' 亜-熙ぁ-んァ-ヶ]{1,99}:[A-F0-9]{8}:(?&lt;enemy&gt;[a-zA-Z-' 亜-熙ぁ-んァ-ヶ]{1,99})">
+                <Actions>
+                  <Action OrderNumber="1" LogLevel="-1" UseTTSTextExpression="${enemy}" VariableOp="SetString" VariableName="Enemy-Name-${var:Enemy-ID}" VariableExpression="${enemy}" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" ActionType="Variable">
+                    <Condition Enabled="false" Grouping="Not">
+                      <ConditionSingle Enabled="true" ExpressionL="${var:Enemy-Name-${var:Enemy-ID}}" ExpressionTypeL="String" ExpressionR="${enemy}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                    </Condition>
+                    <Conditions />
+                  </Action>
+                  <Action OrderNumber="2" LogLevel="-1" VariableOp="SetNumeric" VariableName="Enemy-ID" VariableExpression="${var:Enemy-ID}+1" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" Enabled="False" ActionType="Variable">
+                    <Condition Enabled="true" Grouping="Not" />
+                    <Conditions />
+                  </Action>
+                  <Action OrderNumber="3" LogLevel="-1" UseTTSTextExpression="${var:Enemy-Name-${var:Enemy-ID}}" TextAuraFontSize="9" TextAuraFontName="MS UI Gothic" ActionType="UseTTS">
+                    <Condition Enabled="false" Grouping="Or" />
+                    <Conditions />
+                  </Action>
+                </Actions>
+                <Condition Enabled="true" Grouping="And">
+                  <ConditionSingle Enabled="true" ExpressionL="${name}" ExpressionTypeL="String" ExpressionR="${_ffxivparty[1].name}" ExpressionTypeR="String" ConditionType="StringEqualNocase" />
+                  <ConditionSingle Enabled="true" ExpressionL="${var:Enemy-Name-${var:Enemy-ID}}" ExpressionTypeL="String" ExpressionR="${enemy}" ExpressionTypeR="String" ConditionType="StringNotEqualNocase" />
+                </Condition>
+                <Conditions />
+              </Trigger>
+            </Triggers>
+          </Folder>
+        </Folders>
+        <Triggers />
+      </Folder>
+    </Folders>
+    <Triggers />
+  </ExportedFolder>
+</TriggernometryExport>
